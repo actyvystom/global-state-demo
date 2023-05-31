@@ -10,28 +10,29 @@ const Container = styled.div`
 const AnimalName = styled.strong`
   width: 5rem;
 `;
+// receive global state via props, final prop drilling step
+export default function Counter({ animal, onAdd, onSubtract }) {
+  // not used anymore, we get the handlers via props from topmost component
+  //   const [count, setCount] = useState(0);
 
-export default function Counter({ animalName }) {
-  const [count, setCount] = useState(0);
+  //   function handleAdd() {
+  //     setCount(count + 1);
+  //   }
 
-  function handleAdd() {
-    setCount(count + 1);
-  }
-
-  function handleSubtract() {
-    setCount(Math.max(0, count - 1));
-  }
+  //   function handleSubtract() {
+  //     setCount(Math.max(0, count - 1));
+  //   }
 
   return (
     <Container>
-      <AnimalName>{animalName}:</AnimalName>
-      <button type="button" onClick={() => handleSubtract()}>
+      <AnimalName>{animal.name}:</AnimalName>
+      <button type="button" onClick={() => onSubtract(animal.id)}>
         <span role="img" aria-label="Subtract one from count">
           ➖
         </span>
       </button>
-      <span>{count}</span>
-      <button type="button" onClick={() => handleAdd()}>
+      <span>{animal.count}</span>
+      <button type="button" onClick={() => onAdd(animal.id)}>
         <span role="img" aria-label="Add one to count">
           ➕
         </span>

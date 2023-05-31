@@ -9,16 +9,22 @@ const List = styled.ul`
   padding: 0 0 1rem 0;
   gap: 1rem;
 `;
-
-export default function CounterList() {
+// we receive the global state via our props animal, etc.
+export default function CounterList({ animals, handleAdd, handleSubtract }) {
   return (
     <>
       <h2>Counters</h2>
       <List>
-        <Counter animalName={"Cats"} />
-        <Counter animalName={"Dogs"} />
-        <Counter animalName={"Sheep"} />
-        <Counter animalName={"Dragons"} />
+        {/* next prop drilling step: pass props to the next child component Counter, with naming according to naming ruls onXYZ */}
+        {animals.map((animal) => (
+          <li key={animal.id}>
+            <Counter
+              animal={animal}
+              onAdd={handleAdd}
+              onSubtract={handleSubtract}
+            />
+          </li>
+        ))}
       </List>
     </>
   );
